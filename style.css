@@ -1,0 +1,41 @@
+#menu {
+  height: 30px;
+  bottom: -30px;
+  border-radius: 0 0 6px 6px;
+  position: absolute;
+  color: white;
+  background-color: #616161;
+  line-height: 30px;
+}
+
+#head, .body {
+  background-color: #2196f3;
+  position: absolute;
+  border-radius: 6px;
+}
+
+.body {
+  background-color: #536dfe;
+}
+
+.food {
+  position: absolute;
+  background-color: #d32f2f;
+  border-radius: 50px;
+}
+
+#screen {
+  background-color: #212121;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+}
+
+#main {
+  padding: 5px;
+}
+
+body, head {
+  margin: 0;
+  padding: 0;
+  border: 0;
+} 
