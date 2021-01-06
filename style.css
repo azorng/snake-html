@@ -8,17 +8,17 @@
   line-height: 30px;
 }
 
-#head, .body {
+#head, .body-part {
   background-color: #2196f3;
   position: absolute;
   border-radius: 6px;
 }
 
-.body {
+.body-part {
   background-color: #536dfe;
 }
 
-.food {
+.apple {
   position: absolute;
   background-color: #d32f2f;
   border-radius: 50px;
