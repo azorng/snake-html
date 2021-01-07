@@ -1,14 +1,15 @@
 const gameCtx = {
   direction: undefined,
-  speed: 100,
+  speed: 90,
   score: 0,
   moveHistory: []
 }
 
 const xCols = 20
-const screenHeight = 500
-const screenWidth = 500
+const screenHeight = 600
+const screenWidth = 600
 const pixelSize = screenWidth / xCols
+const nFood = 4
 
 const screen = initScreen()
 const menu = initMenu()
@@ -17,9 +18,11 @@ const body = []
 const food = []
 
 window.onload = () => {
-  document.getElementById('main').appendChild(screen)
+  const main = document.getElementById('main')
+  main.appendChild(screen)
+  main.appendChild(menu)
   initKeyBindings()
-  spawnApple(3)
+  spawnApple(nFood)
 }
 
 function start() {
@@ -51,9 +54,7 @@ function initKeyBindings() {
 
 function handleScreenEdges() {
   handleEdge(head)
-  body.forEach(bodyPart => {
-    handleEdge(bodyPart)
-  })
+  body.forEach(bodyPart => handleEdge(bodyPart))
 }
 
 function handleEdge(el) {
@@ -82,24 +83,30 @@ function moveNext() {
 }
 
 function move(el, direction) {
+  let finalPos;
   switch (direction) {
     case 'Down':
-      el.style.top = parseInt(el.style.top) + pixelSize
+      finalPos = parseInt(el.style.top) + pixelSize
+      el.animate([{ top: el.style.top }, { top: `${finalPos}px` }], { duration: gameCtx.speed })
+      el.style.top = finalPos
       break
 
     case 'Up':
-      el.style.top = parseInt(el.style.top) - pixelSize
+      finalPos = parseInt(el.style.top) - pixelSize
+      el.animate([{ top: el.style.top }, { top: `${finalPos}px` }], { duration: gameCtx.speed })
+      el.style.top = finalPos 
       break
 
     case 'Right':
-      el.style.left = parseInt(el.style.left) + pixelSize
+      finalPos = parseInt(el.style.left) + pixelSize
+      el.animate([{ left: el.style.left }, { left: `${finalPos}px` }], { duration: gameCtx.speed })
+      el.style.left = finalPos
       break
 
     case 'Left':
-      el.style.left = parseInt(el.style.left) - pixelSize
-      break
-
-    default:
+      finalPos = parseInt(el.style.left) - pixelSize
+      el.animate([{ left: el.style.left }, { left: `${finalPos}px` }], { duration: gameCtx.speed })
+      el.style.left = finalPos
       break
   }
 }
@@ -109,7 +116,6 @@ function initScreen() {
   screen.id = 'screen'
   screen.style.width = screenWidth
   screen.style.height = screenHeight
-
   return screen
 }
 
@@ -120,6 +126,7 @@ function spawnApple(n = 1) {
     apple.className = 'apple'
     apple.style.height = pixelSize
     apple.style.width = pixelSize
+    apple.style.fontSize = pixelSize
     apple.style.left = availablePositions[rand(0, availablePositions.length)]
     apple.style.top = availablePositions[rand(0, availablePositions.length)]
     screen.appendChild(apple)
@@ -130,9 +137,9 @@ function spawnApple(n = 1) {
 function initMenu() {
   const menu = document.createElement('div')
   menu.id = 'menu'
-  menu.style.width = 500
+  menu.style.width = screenHeight
   menu.innerHTML = `Score: <span id='score'>${gameCtx.score}</span>`
-  screen.appendChild(menu)
+
   return menu
 }
 
@@ -215,12 +222,15 @@ function initObj(piece) {
   piece.style.bottom = 0
   piece.style.height = pixelSize
   piece.style.width = pixelSize
+  piece.style.lineHeight = pixelSize + 'px'
+  piece.style.fontSize = pixelSize + 'px'
 }
 
 function handleCollision() {
-body.forEach(bodyPart => {
+  body.forEach(bodyPart => {
     if (isSamePos(head, bodyPart)) {
-      alert("COLLISION!!")
+      alert('Game over')
+      location.reload()
     }
   })
 }

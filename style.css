@@ -1,37 +1,61 @@
 #menu {
+  top: 15px;
   height: 30px;
-  bottom: -30px;
-  border-radius: 0 0 6px 6px;
-  position: absolute;
-  color: white;
-  background-color: #616161;
   line-height: 30px;
+  border-radius: 0 0 6px 6px;
+  position: relative;
+  color: white;
+  background-color: #424242;
+  border: 8px solid #424242;
+  font-family: monospace;
+  text-align: center;
+  margin: auto;
 }
 
 #head, .body-part {
-  background-color: #2196f3;
   position: absolute;
   border-radius: 6px;
+  border: 1px solid #aed581;
 }
 
 .body-part {
-  background-color: #536dfe;
+  background-color: #689f38;
+}
+
+#head {
+  background-color: #9ccc65;
 }
 
 .apple {
   position: absolute;
-  background-color: #d32f2f;
+  background-color: #ef5350;
   border-radius: 50px;
+}
+
+.apple::before{
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px; 
+  height: 5px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: #d32f2f;
+  border-radius: 100%;
 }
 
 #screen {
   background-color: #212121;
   border-radius: 6px 6px 0 0;
   position: relative;
+  border: 8px solid #424242;
+  margin: auto;
+  top: 15px;
 }
 
 #main {
-  padding: 5px;
+  height: 100%;
+  background-color: #9e9e9e;
 }
 
 body, head {
